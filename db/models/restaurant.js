@@ -1,7 +1,7 @@
 const mongoose = require("../db/connection");
 const Schema = mongoose.Schema;
 
-const FilmSchema = new Schema({
+const restaurantSchema = new Schema({
   name: String,
   imageUrl: String,
   yelpUrl: String,
@@ -20,4 +20,4 @@ const FilmSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model("Film", FilmSchema);
+module.exports = mongoose.model("Restaurant", restaurantSchema);
