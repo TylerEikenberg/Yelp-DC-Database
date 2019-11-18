@@ -11,7 +11,7 @@ const restaurantSchema = new Schema({
   phone: String,
   coordinates: {
     latitude: Number,
-    longtitude: Number
+    longitude: Number
   },
   location: {
     address: String,

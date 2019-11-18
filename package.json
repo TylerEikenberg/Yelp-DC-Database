@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "getData": "sh ./getData.sh",
-    "seed": "npm run getData && node ./db/seed.js"
+    "seed": "node ./db/seed.js",
+    "dev": "nodemon ./index.js"
   },
   "keywords": [],
   "author": "",

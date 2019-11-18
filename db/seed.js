@@ -10,14 +10,14 @@ const restaurantData = restaurantsJson.map(item => {
     imageUrl: item.image_url,
     yelpUrl: item.url,
     reviewCount: item.review_count,
-    categories: item.categories.map(item => {
-      categories.push(item);
+    categories: item.categories.forEach(item => {
+      return item;
     }),
     rating: item.rating,
     phone: item.display_phone,
     coordinates: {
       latitude: item.coordinates.latitude,
-      longtitude: item.coordinates.longtitude
+      longitude: item.coordinates.longitude
     },
     location: {
       address: item.location.address1,
@@ -31,5 +31,11 @@ const restaurantData = restaurantsJson.map(item => {
 const runSeeder = async () => {
   const deletedRestaurants = await Restaurant.deleteMany({});
   console.log(deletedRestaurants);
+
+  const restaurants = await Restaurant.create(restaurantData);
+  console.log(restaurants.length);
+  console.log("restaurants done");
   process.exit();
 };
+
+runSeeder();
