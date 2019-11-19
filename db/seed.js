@@ -6,29 +6,23 @@ const axios = require("axios");
 
 //TODO: CHANGE URL TO DEPLOYED API ON HEROKU
 const reviewsUrl = "http://localhost:5200/reviews";
-//fetch api to get all
-getReviews = async () => {
-  await axios.get(reviewsUrl).then(res => {
-    let reviewsData = res;
-    const allReviews = reviewsData.data.map(item => {
-      const review = {};
-      review.restaurantId = item.restaurantId;
-      review.id = item._id;
-      review.name = item.name;
-      review.rating = item.rating;
-      review.review = item.review;
-      return review;
-    });
-    // console.log(allReviews.length);
-
-    return allReviews;
+let allReviewDataTotal = [];
+//fetch api to get all reviews
+axios.get(reviewsUrl).then(res => {
+  let reviewsData = res;
+  const allReviews = reviewsData.data.map(item => {
+    const review = {};
+    review.restaurantId = item.restaurantId;
+    review.id = item._id;
+    review.name = item.name;
+    review.rating = item.rating;
+    review.review = item.review;
+    return review;
   });
-  const setReviews = allReviews;
-  console.log(setReviews.length);
-};
-
-const allReviews = getReviews();
-console.log(allReviews);
+  // console.log(allReviews.length);
+  allReviewDataTotal = allReviews;
+  console.log(allReviewDataTotal.length);
+});
 
 /**
  * Creates restaurant data.
@@ -55,8 +49,8 @@ const restaurantData = restaurantsJson.map(item => {
       address: item.location.address1,
       city: item.location.city,
       zip: item.location.zip
-    },
-    reviews: getReviews(item._id)
+    }
+    // reviews: getReviews(item._id)
   };
   return restaurant;
 });
@@ -68,7 +62,6 @@ const runSeeder = async () => {
   const restaurants = await Restaurant.create(restaurantData);
   console.log(restaurants.length);
   console.log("restaurants done");
-  console.log(allReviews.length);
   process.exit();
 };
 
