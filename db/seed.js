@@ -5,14 +5,16 @@ const Review = require("../models/review");
 const restaurantsJson = require("./data/places.json");
 
 const restaurantData = restaurantsJson.map(item => {
+  let categoryArray = [];
+  item.categories.forEach(item => {
+    categoryArray.push(item.title);
+  });
   const restaurant = {
     name: item.name,
     imageUrl: item.image_url,
     yelpUrl: item.url,
     reviewCount: item.review_count,
-    categories: item.categories.forEach(item => {
-      return item;
-    }),
+    categories: categoryArray,
     rating: item.rating,
     phone: item.display_phone,
     coordinates: {
