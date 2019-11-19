@@ -3,6 +3,7 @@ const app = express();
 const parser = require("body-parser");
 
 const Restaurant = require("./models/restaurant");
+const Review = require("./models/review");
 
 var cors = require("cors");
 
@@ -10,6 +11,9 @@ app.use(parser.json());
 app.use(cors());
 app.use(express.static("doc"));
 
+/**
+ * Restaurant paths
+ */
 app.get("/restaurants", (req, res) => {
   Restaurant.find({}).then(restaurants => {
     res.json(restaurants);
@@ -26,8 +30,25 @@ app.get("/restaurants/category/:category", (req, res) => {
   });
 });
 
+/**
+ * Review paths
+ */
+app.get("/reviews", (req, res) => {
+  Review.find({}).then(reviews => {
+    res.json(reviews);
+  });
+});
+app.post("/reviews/create", (req, res) => {
+  Review.create(req.body).then(review => {
+    res.json(review);
+  });
+});
+
+/**
+ * hey listen
+ */
 app.listen(5200, () => {
-  console.log(`Hey bruh server is runnin on port 5200 `);
+  console.log(`Hey listen, server is runnin on port 5200 `);
 });
 
 app.set("port", process.env.PORT || 8080);

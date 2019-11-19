@@ -1,9 +1,11 @@
 mongoose = require("./connection.js");
 const Restaurant = require("../models/restaurant");
-const Category = require("../models/category");
 const Review = require("../models/review");
 const restaurantsJson = require("./data/places.json");
 
+/**
+ * Creates restaurant data.
+ */
 const restaurantData = restaurantsJson.map(item => {
   let categoryArray = [];
   item.categories.forEach(item => {
