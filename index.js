@@ -15,6 +15,16 @@ app.get("/restaurants", (req, res) => {
     res.json(restaurants);
   });
 });
+app.get("/restaurants/:id", (req, res) => {
+  Restaurant.findOne({ _id: req.params.id }).then(restaurants => {
+    res.json(restaurants);
+  });
+});
+app.get("/restaurants/category/:category", (req, res) => {
+  Restaurant.find({ categories: req.params.category }).then(restaurants => {
+    res.json(restaurants);
+  });
+});
 
 app.listen(5200, () => {
   console.log(`Hey bruh server is runnin on port 5200 `);
