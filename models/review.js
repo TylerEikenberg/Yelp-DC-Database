@@ -6,7 +6,6 @@ const reviewSchema = new Schema({
   name: String,
   rating: Number,
   review: String
-  // restaurantId: String
 });
 
 module.exports = mongoose.model("Review", reviewSchema);
