@@ -43,6 +43,13 @@ app.post("/reviews/create", (req, res) => {
     res.json(review);
   });
 });
+app.put("/reviews/update/:id", (req, res) => {
+  Review.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }).then(
+    review => {
+      res.json(review);
+    }
+  );
+});
 app.delete("/reviews/delete/:id", (req, res) => {
   Review.findOneAndRemove({ _id: req.params.id }).then(review => {
     res.json(review);
