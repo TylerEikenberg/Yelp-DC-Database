@@ -8,7 +8,9 @@
     "getData": "sh ./getData.sh",
     "seed": "node ./db/seed.js",
     "dev": "nodemon ./index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "pushHeroku": "git push heroku master",
+    "seedHeroku": "heroku run node db/seed.js"
   },
   "keywords": [],
   "author": "",
