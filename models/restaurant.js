@@ -1,4 +1,5 @@
 const mongoose = require("../db/connection");
+const Review = require("./review");
 const Schema = mongoose.Schema;
 
 const restaurantSchema = new Schema({
@@ -17,7 +18,8 @@ const restaurantSchema = new Schema({
     address: String,
     city: String,
     zip: String
-  }
+  },
+  reviews: [Review.schema]
 });
 
 module.exports = mongoose.model("Restaurant", restaurantSchema);
