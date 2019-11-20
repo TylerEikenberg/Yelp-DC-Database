@@ -19,7 +19,7 @@ const restaurantSchema = new Schema({
     city: String,
     zip: String
   },
-  reviews: [Review.schema]
+  reviews: [String]
 });
 
 module.exports = mongoose.model("Restaurant", restaurantSchema);

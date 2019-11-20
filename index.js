@@ -38,9 +38,37 @@ app.get("/reviews", (req, res) => {
     res.json(reviews);
   });
 });
+
 app.post("/reviews/create", (req, res) => {
   Review.create(req.body).then(review => {
+    let id = review._id; //sets variable id to the reviews _id
+    let restaurantId = req.body.restaurantId; //sets variable restaurantId to the reviews restaurant id
+    updateReviews(restaurantId, id); //call function that updates restaurants review array by passing in restaurantId and id
     res.json(review);
+    // res.json(id);
+    // res.json(req.body.restaurantId);
+  });
+});
+
+const updateReviews = (restaurantId, reviewId) => {
+  app.put("/restaurants/update/:id", (req, res) => {
+    Restaurant.findOneAndUpdate(
+      { _id: `${restaurantId}` },
+      { $push: { reviews: `${reviewId}` } },
+      { new: true }
+    ).then(restaurant => {
+      res.json(restaurant);
+    });
+  });
+};
+
+app.put("/restaurants/update/:id", (req, res) => {
+  Restaurant.findOneAndUpdate(
+    { _id: req.params.id },
+    { $push: { reviews: req.body.review } },
+    { new: true }
+  ).then(restaurant => {
+    res.json(restaurant);
   });
 });
 app.put("/reviews/update/:id", (req, res) => {
