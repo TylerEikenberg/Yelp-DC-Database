@@ -24,6 +24,11 @@ app.get("/restaurants/:id", (req, res) => {
     res.json(restaurants);
   });
 });
+app.get("/restaurants/name/:name", (req, res) => {
+  Restaurant.findOne({ name: req.params.name }).then(restaurants => {
+    res.json(restaurants);
+  });
+});
 app.get("/restaurants/category/:category", (req, res) => {
   Restaurant.find({ categories: req.params.category }).then(restaurants => {
     res.json(restaurants);
@@ -39,28 +44,30 @@ app.get("/reviews", (req, res) => {
   });
 });
 
-app.post("/reviews/create", (req, res) => {
-  Review.create(req.body).then(review => {
-    let id = review._id; //sets variable id to the reviews _id
-    let restaurantId = req.body.restaurantId; //sets variable restaurantId to the reviews restaurant id
-    updateReviews(restaurantId, id); //call function that updates restaurants review array by passing in restaurantId and id
-    res.json(review);
-    // res.json(id);
-    // res.json(req.body.restaurantId);
-  });
-});
-
-const updateReviews = (restaurantId, reviewId) => {
-  app.put("/restaurants/update/:id", (req, res) => {
-    Restaurant.findOneAndUpdate(
-      { _id: `${restaurantId}` },
-      { $push: { reviews: `${reviewId}` } },
-      { new: true }
-    ).then(restaurant => {
-      res.json(restaurant);
-    });
-  });
-};
+// app.post("/reviews/create", async (req, res) => {
+//   Review.create(req.body).then(async review => {
+//     let id = review._id; //sets variable id to the reviews _id
+//     let restaurantId = req.body.restaurantId; //sets variable restaurantId to the reviews restaurant id
+//     let sample = await updateReviews(restaurantId, id); //call function that updates restaurants review array by passing in restaurantId and id
+//     if (sample) {
+//       res.json(sample);
+//     }
+//     res.json("hello");
+//     // res.json(id);
+//     // res.json(req.body.restaurantId);
+//   });
+// });
+// function updateReviews(restaurantId, reviewId) {
+//   app.put("/restaurants/update/:id", (req, res) => {
+//     Restaurant.findOneAndUpdate(
+//       { _id: `${restaurantId}` },
+//       { $push: { reviews: `${reviewId}` } },
+//       { new: true }
+//     ).then(restaurant => {
+//       return "hello";
+//     });
+//   });
+// }
 
 app.put("/restaurants/update/:id", (req, res) => {
   Restaurant.findOneAndUpdate(
