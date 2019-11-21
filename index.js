@@ -44,40 +44,33 @@ app.get("/reviews", (req, res) => {
   });
 });
 
-// app.post("/reviews/create", async (req, res) => {
-//   Review.create(req.body).then(async review => {
-//     let id = review._id; //sets variable id to the reviews _id
-//     let restaurantId = req.body.restaurantId; //sets variable restaurantId to the reviews restaurant id
-//     let sample = await updateReviews(restaurantId, id); //call function that updates restaurants review array by passing in restaurantId and id
-//     if (sample) {
-//       res.json(sample);
-//     }
-//     res.json("hello");
-//     // res.json(id);
-//     // res.json(req.body.restaurantId);
-//   });
-// });
-// function updateReviews(restaurantId, reviewId) {
-//   app.put("/restaurants/update/:id", (req, res) => {
-//     Restaurant.findOneAndUpdate(
-//       { _id: `${restaurantId}` },
-//       { $push: { reviews: `${reviewId}` } },
-//       { new: true }
-//     ).then(restaurant => {
-//       return "hello";
-//     });
-//   });
-// }
-
-app.put("/restaurants/update/:id", (req, res) => {
-  Restaurant.findOneAndUpdate(
-    { _id: req.params.id },
-    { $push: { reviews: req.body.review } },
-    { new: true }
-  ).then(restaurant => {
-    res.json(restaurant);
+app.post("/reviews/create", (req, res) => {
+  Review.create(req.body).then(review => {
+    res.json(review);
   });
 });
+
+const updateReviews = (restaurantId, reviewId) => {
+  app.put("/restaurants/update/:id", (req, res) => {
+    Restaurant.findOneAndUpdate(
+      { _id: `${restaurantId}` },
+      { $push: { reviews: `${reviewId}` } },
+      { new: true }
+    ).then(restaurant => {
+      res.json(restaurant);
+    });
+  });
+};
+
+// app.put("/restaurants/update/:id", (req, res) => {
+//   Restaurant.findOneAndUpdate(
+//     { _id: req.params.id },
+//     { $push: { reviews: req.body.review } },
+//     { new: true }
+//   ).then(restaurant => {
+//     res.json(restaurant);
+//   });
+// });
 app.put("/reviews/update/:id", (req, res) => {
   Review.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }).then(
     review => {

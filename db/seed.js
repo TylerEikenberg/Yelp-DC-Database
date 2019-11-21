@@ -2,6 +2,7 @@ mongoose = require("./connection.js");
 const Restaurant = require("../models/restaurant");
 const restaurantsJson = require("./data/places.json");
 const axios = require("axios");
+const cors = require("cors");
 
 //TODO: CHANGE URL TO DEPLOYED API ON HEROKU
 //TODO: CREATE SAMPLE REVIEWS FOR DEPLOYED API
