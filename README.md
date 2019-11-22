@@ -1,5 +1,9 @@
 # Top 100 Restaurants in DC Database
 
+This API returns information about the 100 best rated restaurants in Washington, D.C. It also includes functionality for writing, updating, and deleting reviews. 
+
+## REST Routes
+
 REST routes for the Restaurants model:
 
 | URL                  | Path                    | Method   | Action  | Description                                 |
