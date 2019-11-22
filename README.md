@@ -6,8 +6,9 @@ REST routes for the Restaurants model:
 | -------------------- | ----------------------- | -------- | ------- | ------------------------------------------- |
 | `/restaurants`       | `/restaurants`          | `GET`    | #index  | List of all restaurants                     |
 | `/restaurants`       | `/:id`                  | `GET`    | #show   | Displays a single restaurant by id          |
-| `/restaurants`       | `/:category`            | `GET`    | #show   | Displays all restaurants with category      |
-
+| `/restaurants`       | `name/:name`            | `GET`    | #show   | Displays all restaurants by name            |
+| `/restaurants`       | `category/:category`    | `GET`    | #show   | Displays all restaurants by category        |
+ 
 REST routes for the Reviews model:
 
 | URL                  | Path                    | Method   | Action  | Description                                 |
